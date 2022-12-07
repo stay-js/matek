@@ -79,7 +79,7 @@ export const questions = [
     question:
       'Egy sakkverseny minden résztvevője pontosan egy játszmát játszott a többi résztvevő mindegyikével. Ezen a versenyenösszesen 153 partit játszottak le. Hányan vettek részt a sakkversenyen?',
     answers: ['11', '24', '18', '19'],
-    correct: 3,
+    correct: 2,
   },
   {
     id: 'clbdxzowu000d3b6dgtrqel5u',
