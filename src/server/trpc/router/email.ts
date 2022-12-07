@@ -55,18 +55,20 @@ export const emailRouter = router({
         <div>
         Az ön által megadott válaszok:
         ${questions
-          .map(
-            (question, index) => `
+          .map((question, index) => {
+            const answer = answers[question.id];
+
+            return `
             <div>
             <b>${index + 1}. ${question.question}</b>
             <br />
-            Az ön válasza: <b>${answers[question.id] || 'Nem adott meg választ.'}</b>
+            Az ön válasza: <b>${answer ? question.answers[answer] : 'Nem adott meg választ.'}</b>
             <br />
             Helyes válasz: <b>${question.answers[question.correct]}</b>
             </div>
             <br />
-          `,
-          )
+          `;
+          })
           .join('')}
 
         </div>
