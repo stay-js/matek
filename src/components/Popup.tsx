@@ -19,7 +19,7 @@ export const Popup: React.FC<{
         leaveFrom="opacity-100"
         leaveTo="opacity-0"
       >
-        <div className="fixed inset-0 bg-black bg-opacity-25 dark:bg-opacity-50" />
+        <div className="fixed inset-0 bg-black bg-opacity-50" />
       </Transition.Child>
 
       <div className="content fixed inset-0 grid place-items-center">
@@ -32,9 +32,9 @@ export const Popup: React.FC<{
           leaveFrom="opacity-100 scale-100"
           leaveTo="opacity-0 scale-95"
         >
-          <Dialog.Panel className="flex w-full max-w-md flex-col gap-4 rounded-2xl bg-white p-6 shadow-xl dark:bg-neutral-900">
+          <Dialog.Panel className="flex w-full max-w-md flex-col gap-4 rounded-2xl bg-neutral-900 p-6 shadow-xl">
             <div className="flex flex-col gap-2">
-              <Dialog.Title className="text-lg font-bold text-neutral-900 dark:text-neutral-50">
+              <Dialog.Title className="text-lg font-bold text-neutral-50">
                 {isLoading
                   ? 'Feldolgozás alatt...'
                   : isSuccess
@@ -42,7 +42,7 @@ export const Popup: React.FC<{
                   : 'Hiba csúszott a gépezetbe'}
               </Dialog.Title>
 
-              <Dialog.Description className="mb-0 text-sm text-neutral-500 dark:text-neutral-200">
+              <Dialog.Description className="mb-0 text-sm text-neutral-200">
                 {isLoading ? (
                   <div className="flex flex-col items-center gap-2 ">
                     <svg className="h-8 w-8 animate-spin" fill="none" viewBox="0 0 24 24">
@@ -82,10 +82,10 @@ export const Popup: React.FC<{
 
             <button
               type="button"
-              className="group flex w-fit items-center rounded-lg bg-gradient-to-br from-green-400 to-blue-600 p-0.5 font-medium text-gray-900 hover:from-green-400 hover:to-blue-600 hover:text-white dark:text-white"
+              className="group flex w-fit items-center rounded-lg bg-gradient-to-br from-green-400 to-blue-600 p-0.5 font-medium text-white hover:from-green-400 hover:to-blue-600 hover:text-white"
               onClick={() => setIsOpen(false)}
             >
-              <span className="flex w-fit items-center justify-center rounded-md bg-white px-4 py-2 text-sm transition-all group-hover:bg-opacity-0 dark:bg-neutral-900">
+              <span className="flex w-fit items-center justify-center rounded-md bg-neutral-900 px-4 py-2 text-sm transition-all group-hover:bg-opacity-0">
                 Bezárás
               </span>
             </button>
