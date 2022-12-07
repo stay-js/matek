@@ -27,6 +27,10 @@ export const emailRouter = router({
       }),
     )
     .mutation(async ({ input: { user, answers } }) => {
+      const correctAnswers = questions.filter(
+        (question) => question.correct === (answers as Record<string, number | null>)[question.id],
+      ).length;
+
       const mailOptions = {
         from: `Matek - noreply<${env.NODEMAILER_USER}>`,
         to: user.email,
@@ -38,6 +42,14 @@ export const emailRouter = router({
         E-mail: <b>${user.email}</b>
         </div>
         <br />
+
+        <div>
+        Eredmény: <b>${((correctAnswers / questions.length) * 100).toFixed(2)}%</b>
+        <br />
+        Összesen <b>${
+          questions.length
+        }</b> kérdésből <b>${correctAnswers}</b> helyes választ adott meg.
+        </div>
     
         <div>
         Az ön által megadott válaszok:
@@ -65,8 +77,6 @@ export const emailRouter = router({
         </div>
         `,
       };
-
-      console.log(mailOptions);
 
       try {
         const status = await transporter.sendMail(mailOptions);
