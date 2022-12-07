@@ -23,11 +23,9 @@ export const Layout: React.FC<{
         <meta property="og:locale" content="en_US" />
         <meta property="og:type" content="website" key="og_type" />
         <meta property="og:site_name" content="Zétény Nagy" key="site_name" />
-        <meta property="og:image" content="https://znagy.hu/images/me.png" key="image" />
 
         <meta name="twitter:card" content="summary_large_image" />
         <meta property="twitter:domain" content="znagy.hu" />
-        <meta name="twitter:image" content="https://znagy.hu/images/me.png" />
 
         <meta name="robots" content="index, follow" />
         <meta name="language" content="English" />
@@ -41,9 +39,9 @@ export const Layout: React.FC<{
         <meta property="og:description" content={desc} />
         <meta name="twitter:description" content={desc} />
 
-        <meta name="url" content={`https://znagy.hu${path}`} />
-        <meta property="og:url" content={`https://znagy.hu${path}`} />
-        <meta property="twitter:url" content={`https://znagy.hu${path}`} />
+        <meta name="url" content={`https://matek.znagy.hu${path}`} />
+        <meta property="og:url" content={`https://matek.znagy.hu${path}`} />
+        <meta property="twitter:url" content={`https://matek.znagy.hu${path}`} />
       </Head>
 
       <main>{children}</main>

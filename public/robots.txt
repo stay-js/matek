@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://matek.znagy.hu
+
+# Sitemaps
+Sitemap: https://matek.znagy.hu/sitemap.xml

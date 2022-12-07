@@ -3,10 +3,8 @@ import { TbUser, TbMail } from 'react-icons/tb';
 import { z } from 'zod';
 
 const UserSchema = z.object({
-  name: z.string().min(1, 'Kérem adja meg a nevét!'),
-  email: z
-    .string()
-    .email('Az Ön által megadott e-mail cím helytelen! Kérem adjon meg egy valós e-mail címet!'),
+  name: z.string().min(1, 'Kérjük töltse ki ezt a mezőt!'),
+  email: z.string().email('Kérjük adjon meg egy valós e-mail címet!'),
 });
 
 export type Props = z.infer<typeof UserSchema>;
