@@ -23,12 +23,12 @@ export const emailRouter = router({
           name: z.string(),
           email: z.string().email(),
         }),
-        answers: z.unknown(),
+        answers: z.record(z.number().nullable()),
       }),
     )
     .mutation(async ({ input: { user, answers } }) => {
       const correctAnswers = questions.filter(
-        (question) => question.correct === (answers as Record<string, number | null>)[question.id],
+        (question) => question.correct === answers[question.id],
       ).length;
 
       const mailOptions = {
@@ -55,20 +55,18 @@ export const emailRouter = router({
         <div>
         Az ön által megadott válaszok:
         ${questions
-          .map((question, index) => {
-            const answer = (answers as Record<string, number | null>)[question.id];
-
-            return `
+          .map(
+            (question, index) => `
             <div>
             <b>${index + 1}. ${question.question}</b>
             <br />
-            Az ön válasza: <b>${answer ? question.answers[answer] : 'Nem adott meg választ.'}</b>
+            Az ön válasza: <b>${answers[question.id] || 'Nem adott meg választ.'}</b>
             <br />
             Helyes válasz: <b>${question.answers[question.correct]}</b>
             </div>
             <br />
-          `;
-          })
+          `,
+          )
           .join('')}
 
         </div>
