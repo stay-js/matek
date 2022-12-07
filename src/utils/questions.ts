@@ -51,7 +51,7 @@ export const questions = [
     id: 'clbdxz64400053b6dr36qq36r',
     question:
       'Egy kétjegyű szám számjegyeinek összege 9. Ha a számjegyeket felcseréljük és az így kapott számot az eredetivel megszorozzuk, szorzatul 2268-at kapunk. Melyik ez a szám?',
-    answers: ['36 és 63', '18 és 81', '45 sé 54', 'Nincs megoldás'],
+    answers: ['36 és 63', '18 és 81', '45 és 54', 'Nincs megoldás'],
     correct: 0,
   },
   {
