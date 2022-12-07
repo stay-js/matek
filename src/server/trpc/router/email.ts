@@ -62,7 +62,7 @@ export const emailRouter = router({
             <div>
             <b>${index + 1}. ${question.question}</b>
             <br />
-            Az ön válasza: <b>${answer !== null || answer !== undefined ? question.answers[answer] : 'Nem adott meg választ.'}</b>
+            Az ön válasza: <b>${answer !== null && answer !== undefined ? question.answers[answer] : 'Nem adott meg választ.'}</b>
             <br />
             Helyes válasz: <b>${question.answers[question.correct]}</b>
             </div>
