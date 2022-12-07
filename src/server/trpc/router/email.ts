@@ -50,6 +50,7 @@ export const emailRouter = router({
           questions.length
         }</b> kérdésből <b>${correctAnswers}</b> helyes választ adott meg.
         </div>
+        <br />
     
         <div>
         Az ön által megadott válaszok:
@@ -61,13 +62,9 @@ export const emailRouter = router({
             <div>
             <b>${index + 1}. ${question.question}</b>
             <br />
-            Ön válasza: <b>${answer ? question.answers[answer] : 'Nem adott meg választ.'}</b>
+            Az ön válasza: <b>${answer ? question.answers[answer] : 'Nem adott meg választ.'}</b>
             <br />
-            ${
-              question.correct === answer
-                ? '<b>Helyes<b>'
-                : `<b>Helytelen<b>, helyes válasz: ${question.answers[question.correct]}`
-            }
+            Helyes válasz: <b>${question.answers[question.correct]}</b>
             </div>
             <br />
           `;
