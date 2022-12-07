@@ -59,7 +59,7 @@ export const Form: React.FC<{ setUser: (user: Props | null) => void }> = ({ setU
               className="h-10 w-full rounded border border-neutral-300 pl-10 pr-2 text-black dark:border-[#373A40] dark:bg-[#25262b] dark:text-white"
               type="text"
               id="name"
-              placeholder="Example Peter"
+              placeholder="Minta János"
               value={values.name}
               onChange={(e) => setValues({ ...values, name: e.target.value })}
             />
@@ -82,7 +82,7 @@ export const Form: React.FC<{ setUser: (user: Props | null) => void }> = ({ setU
               className="h-10 w-full rounded border border-neutral-300 pl-10 pr-2 text-black dark:border-[#373A40] dark:bg-[#25262b] dark:text-white"
               type="text"
               id="email"
-              placeholder="example@gmail.com"
+              placeholder="minta@gmail.com"
               value={values.email}
               onChange={(e) => setValues({ ...values, email: e.target.value })}
             />
@@ -98,7 +98,7 @@ export const Form: React.FC<{ setUser: (user: Props | null) => void }> = ({ setU
           className="group flex w-full items-center rounded-lg bg-gradient-to-br from-green-400 to-blue-600 p-0.5 font-medium text-gray-900 hover:from-green-400 hover:to-blue-600 hover:text-white dark:text-white"
         >
           <span className="flex w-full items-center justify-center rounded-md bg-white px-6 py-3 transition-all group-hover:bg-opacity-0 dark:bg-neutral-800">
-            Következő
+            Tovább
           </span>
         </button>
       </form>

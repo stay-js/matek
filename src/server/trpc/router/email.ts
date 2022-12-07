@@ -2,8 +2,8 @@ import { TRPCError } from '@trpc/server';
 import nodemailer from 'nodemailer';
 import { z } from 'zod';
 import { env } from '@env/server.mjs';
-import { router, publicProcedure } from '../trpc';
 import { questions } from '@utils/questions';
+import { router, publicProcedure } from '../trpc';
 
 const transporter = nodemailer.createTransport({
   host: env.NODEMAILER_HOST,
@@ -41,24 +41,27 @@ export const emailRouter = router({
     
         <div>
         Az ön által megadott válaszok:
-        ${questions.map((question, index) => {
-          const answer = (answers as Record<string, number | null>)[question.id];
-          const correct = question.correct === answer;
+        ${questions
+          .map((question, index) => {
+            const answer = (answers as Record<string, number | null>)[question.id];
 
-          return `
+            return `
             <div>
             <b>${index + 1}. ${question.question}</b>
             <br />
             Ön válasza: <b>${answer ? question.answers[answer] : 'Nem adott meg választ.'}</b>
             <br />
             ${
-              correct ? 'Helyes' : `Helytelen, helyes válasz: ${question.answers[question.correct]}`
+              question.correct === answer
+                ? '<b>Helyes<b>'
+                : `<b>Helytelen<b>, helyes válasz: ${question.answers[question.correct]}`
             }
             </div>
             <br />
           `;
-        })}
-        <br />
+          })
+          .join('')}
+
         </div>
         `,
       };
