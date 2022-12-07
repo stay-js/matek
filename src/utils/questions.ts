@@ -41,7 +41,7 @@ export const questions = [
     correct: 2,
   },
   {
-    id: 'clbdxywti00033b6dh8esuj68',
+    id: 'clbdy2duw000g3b6dawtjhmzf',
     question:
       'Egy társaság 48 000 Ft-ért kisbuszt bérelt. Az elutazás pillanatában még egy utas csatlakozott hozzájuk, így mindegyik utasnak 200 Ft-tal kevesebbet kellett fizetnie. Hány utas volt eredetileg?',
     answers: ['13', '15', '19', '16'],
@@ -75,7 +75,7 @@ export const questions = [
     correct: 1,
   },
   {
-    id: 'clbdxzhhj000a3b6dgdklh3xa',
+    id: 'clbdy32if000j3b6dfckxpavf',
     question:
       'Egy sakkverseny minden résztvevője pontosan egy játszmát játszott a többi résztvevő mindegyikével. Ezen a versenyenösszesen 153 partit játszottak le. Hányan vettek részt a sakkversenyen?',
     answers: ['11', '24', '18', '19'],
