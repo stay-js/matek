@@ -9,7 +9,7 @@ import { trpc } from '@utils/trpc';
 
 const Home: NextPage = () => {
   const [user, setUser] = useState<User | null>(null);
-  const [answers, setAnswers] = useState<Record<string, number | null>>({});
+  const [answers, setAnswers] = useState<Record<string, number>>({});
   const [isPopupOpen, setIsPopupOpen] = useState<boolean>(false);
 
   const { mutate, isLoading, isSuccess } = trpc.email.send.useMutation({
@@ -62,10 +62,7 @@ const Home: NextPage = () => {
                 <button
                   className="group flex w-full items-center rounded-lg bg-gradient-to-br from-green-400 to-blue-600 p-0.5 font-medium  text-white hover:from-green-400 hover:to-blue-600 hover:text-white"
                   type="button"
-                  onClick={() => {
-                    mutate({ user, answers });
-                    console.log(answers);
-                  }}
+                  onClick={() => mutate({ user, answers })}
                 >
                   <span className="flex w-full items-center justify-center rounded-md bg-neutral-800 px-6 py-3 transition-all group-hover:bg-opacity-0">
                     Elküldöm
