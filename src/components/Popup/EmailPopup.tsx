@@ -2,7 +2,7 @@ import { Fragment } from 'react';
 import Link from 'next/link';
 import { Dialog, Transition } from '@headlessui/react';
 
-export const Popup: React.FC<{
+export const EmailPopup: React.FC<{
   isOpen: boolean;
   isLoading: boolean;
   isSuccess: boolean;
