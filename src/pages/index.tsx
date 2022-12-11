@@ -87,7 +87,7 @@ const Home: NextPage = () => {
             <h2 className="text-xl font-bold text-neutral-50">Köszönjük a játékot!</h2>
             <ul>
               <li>
-                Ön az <b>{level}</b> szintig jutott el {levels} szintből.
+                Ön a(z) <b>{level}.</b> szintig jutott el {levels} szintből.
               </li>
               <li>
                 Eredmény: <b>{((correctAnswers / answeredQuestions.length) * 100).toFixed(2)}%</b>
@@ -102,10 +102,11 @@ const Home: NextPage = () => {
               Amennyiben szeretné, hogy válaszait, az ön által megadott e-mail címre elküldjük,
               nyomja meg az alábbi gombot.
             </p>
+
             <button
               className="group flex w-full items-center rounded-lg bg-gradient-to-br from-green-400 to-blue-600 p-0.5 font-medium  text-white hover:from-green-400 hover:to-blue-600 hover:text-white"
               type="button"
-              onClick={() => user && level && mutate({ user, answers, level })}
+              onClick={() => mutate({ user, answers, level })}
             >
               <span className="flex w-full items-center justify-center rounded-md bg-neutral-800 px-6 py-3 transition-all group-hover:bg-opacity-0">
                 Kérem az eredményt!
@@ -113,6 +114,13 @@ const Home: NextPage = () => {
             </button>
           </div>
         </section>
+
+        <EmailPopup
+          isOpen={isEmailPopupOpen}
+          setIsOpen={setIsEmailPopupOpen}
+          isLoading={isLoading}
+          isSuccess={isSuccess}
+        />
       </Layout>
     );
   }
@@ -178,12 +186,6 @@ const Home: NextPage = () => {
         ))}
       </div>
 
-      <EmailPopup
-        isOpen={isEmailPopupOpen}
-        setIsOpen={setIsEmailPopupOpen}
-        isLoading={isLoading}
-        isSuccess={isSuccess}
-      />
       <LevelFailedPopup
         isOpen={isLevelFailedPopupOpen}
         setIsOpen={setIsLevelFailedPopupOpen}
