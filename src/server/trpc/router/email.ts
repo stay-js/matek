@@ -23,7 +23,7 @@ export const emailRouter = router({
           name: z.string(),
           email: z.string().email(),
         }),
-        answers: z.record(z.number().nullable()),
+        answers: z.record(z.number()),
         level: z.number(),
       }),
     )
@@ -59,16 +59,12 @@ export const emailRouter = router({
         Az ön által megadott válaszok:
         ${answeredQuestions
           .map((question, index) => {
-            const answer = answers[question.id];
-
             return `
             <div>
             <b>${index + 1}. ${question.question}</b>
             <br />
             Az ön válasza: <b>${
-              answer !== null && answer !== undefined
-                ? question.answers[answer]
-                : 'Nem adott meg választ.'
+              question.answers[answers[question.id]] || 'Nem adott meg választ.'
             }</b>
             <br />
             Helyes válasz: <b>${question.answers[question.correct]}</b>
