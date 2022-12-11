@@ -11,6 +11,7 @@ const Home: NextPage = () => {
   const [user, setUser] = useState<User | null>(null);
   const [answers, setAnswers] = useState<Record<string, number>>({});
   const [level, setLevel] = useState<number | null>(null);
+  const [isDone, setIsDone] = useState<boolean>(false);
   const [isEmailPopupOpen, setIsEmailPopupOpen] = useState<boolean>(false);
   const [isLevelFailedPopupOpen, setIsLevelFailedPopupOpen] = useState<boolean>(false);
 
@@ -19,8 +20,6 @@ const Home: NextPage = () => {
   const { mutate, isLoading, isSuccess } = trpc.email.send.useMutation({
     onMutate: () => setIsEmailPopupOpen(true),
   });
-
-  const submitAnswers = () => user && level && mutate({ user, answers, level });
 
   const handleNextLevel = () => {
     if (level && level < levels) {
@@ -37,7 +36,7 @@ const Home: NextPage = () => {
       setLevel(level + 1);
     }
 
-    if (level === levels) submitAnswers();
+    if (level === levels) setIsDone(true);
   };
 
   if (!user) {
@@ -67,6 +66,49 @@ const Home: NextPage = () => {
             >
               <span className="flex w-full items-center justify-center rounded-md bg-neutral-800 px-6 py-3 transition-all group-hover:bg-opacity-0">
                 Rendben
+              </span>
+            </button>
+          </div>
+        </section>
+      </Layout>
+    );
+  }
+
+  if (isDone) {
+    const answeredQuestions = questions.filter((question) => question.level <= level);
+    const correctAnswers = answeredQuestions.filter(
+      (question) => question.correct === answers[question.id],
+    ).length;
+
+    return (
+      <Layout path="/" title="Matek - Zétény Nagy" desc="Matek - Zétény Nagy">
+        <section className="mx-auto flex min-h-screen w-11/12 flex-col items-center justify-center">
+          <div className="flex w-full max-w-lg flex-col gap-4 rounded-2xl bg-neutral-800 p-8 text-sm shadow-2xl sm:p-12 md:px-20">
+            <h2 className="text-xl font-bold text-neutral-50">Köszönjük a játékot!</h2>
+            <ul>
+              <li>
+                Ön az <b>{level}</b> szintig jutott el {levels} szintből.
+              </li>
+              <li>
+                Eredmény: <b>{((correctAnswers / answeredQuestions.length) * 100).toFixed(2)}%</b>
+              </li>
+              <li>
+                Összesen <b>{answeredQuestions.length}</b> kérdésből <b>{correctAnswers}</b> helyes
+                választ adott meg.
+              </li>
+            </ul>
+
+            <p>
+              Amennyiben szeretné, hogy válaszait, az ön által megadott e-mail címre elküldjük,
+              nyomja meg az alábbi gombot.
+            </p>
+            <button
+              className="group flex w-full items-center rounded-lg bg-gradient-to-br from-green-400 to-blue-600 p-0.5 font-medium  text-white hover:from-green-400 hover:to-blue-600 hover:text-white"
+              type="button"
+              onClick={() => user && level && mutate({ user, answers, level })}
+            >
+              <span className="flex w-full items-center justify-center rounded-md bg-neutral-800 px-6 py-3 transition-all group-hover:bg-opacity-0">
+                Kérem az eredményt!
               </span>
             </button>
           </div>
@@ -142,7 +184,11 @@ const Home: NextPage = () => {
         isLoading={isLoading}
         isSuccess={isSuccess}
       />
-      <LevelFailedPopup isOpen={isLevelFailedPopupOpen} setIsOpen={setIsLevelFailedPopupOpen} />
+      <LevelFailedPopup
+        isOpen={isLevelFailedPopupOpen}
+        setIsOpen={setIsLevelFailedPopupOpen}
+        setIsDone={setIsDone}
+      />
     </Layout>
   );
 };

@@ -4,7 +4,8 @@ import { Dialog, Transition } from '@headlessui/react';
 export const LevelFailedPopup: React.FC<{
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
-}> = ({ isOpen, setIsOpen }) => (
+  setIsDone: (isDone: boolean) => void;
+}> = ({ isOpen, setIsOpen, setIsDone }) => (
   <Transition appear show={isOpen} as={Fragment}>
     <Dialog as="div" className="relative z-50" onClose={() => setIsOpen(false)}>
       <Transition.Child
@@ -58,7 +59,10 @@ export const LevelFailedPopup: React.FC<{
               <button
                 type="button"
                 className="rounded-lg border-2 border-red-500 bg-red-500 py-2 px-4 text-sm font-bold text-white transition-all hover:bg-transparent hover:text-red-500"
-                onClick={() => setIsOpen(false)}
+                onClick={() => {
+                  setIsOpen(false);
+                  setIsDone(true);
+                }}
               >
                 Befejezem
               </button>

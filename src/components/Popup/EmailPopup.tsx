@@ -61,7 +61,7 @@ export const EmailPopup: React.FC<{
                     Feldolgozás alatt...
                   </div>
                 ) : isSuccess ? (
-                  'Válaszait sikeresen feldolgoztuk. Az ön által megadott e-mail címre elküldtük az eredményeket.'
+                  'Válaszait az ön által megadott e-mail címre sikeresen elküldtük.'
                 ) : (
                   <>
                     Sikertelen, kérjük próbálja újra később! Ha a probléma továbbra is fennáll
