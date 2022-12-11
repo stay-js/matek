@@ -46,7 +46,7 @@ export const emailRouter = router({
         <br />
 
         <div>
-        Ön a(z) <b>${level}.</b> szintig jutott el ${levels} szintből.
+        Ön a(z) <b>${level}.</b> szintig jutott el <b>${levels}</b> szintből.
         Eredmény: <b>${((correctAnswers / answeredQuestions.length) * 100).toFixed(2)}%</b>
         <br />
         Összesen <b>${

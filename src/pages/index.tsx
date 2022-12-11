@@ -87,7 +87,7 @@ const Home: NextPage = () => {
             <h2 className="text-xl font-bold text-neutral-50">Köszönjük a játékot!</h2>
             <ul>
               <li>
-                Ön a(z) <b>{level}.</b> szintig jutott el {levels} szintből.
+                Ön a(z) <b>{level}.</b> szintig jutott el <b>{levels}</b> szintből.
               </li>
               <li>
                 Eredmény: <b>{((correctAnswers / answeredQuestions.length) * 100).toFixed(2)}%</b>
