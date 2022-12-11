@@ -65,7 +65,7 @@ export const EmailPopup: React.FC<{
                 ) : (
                   <>
                     Sikertelen, kérjük próbálja újra később! Ha a probléma továbbra is fennáll
-                    küldjön emailt az alábbi e-mail címre{' '}
+                    küldjön emailt az alábbi e-mail címre:{' '}
                     <Link
                       className="bg-gradient-to-r from-teal-400 to-green-500 bg-clip-text text-transparent"
                       href="mailto:nagyzeteny6@gmail.com"
@@ -86,7 +86,7 @@ export const EmailPopup: React.FC<{
               onClick={() => setIsOpen(false)}
             >
               <span className="flex w-fit items-center justify-center rounded-md bg-neutral-900 px-4 py-2 text-sm transition-all group-hover:bg-opacity-0">
-                Bezárás
+                Rendben
               </span>
             </button>
           </Dialog.Panel>
