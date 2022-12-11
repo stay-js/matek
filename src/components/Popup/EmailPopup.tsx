@@ -2,7 +2,7 @@ import { Fragment } from 'react';
 import Link from 'next/link';
 import { Dialog, Transition } from '@headlessui/react';
 
-export const Popup: React.FC<{
+export const EmailPopup: React.FC<{
   isOpen: boolean;
   isLoading: boolean;
   isSuccess: boolean;
@@ -61,7 +61,7 @@ export const Popup: React.FC<{
                     Feldolgozás alatt...
                   </div>
                 ) : isSuccess ? (
-                  'Válaszait sikeresen feldolgoztuk. Az ön által megadott e-mail címre elküldtük az eredményeket.'
+                  'Válaszait az ön által megadott e-mail címre sikeresen elküldtük.'
                 ) : (
                   <>
                     Sikertelen, kérjük próbálja újra később! Ha a probléma továbbra is fennáll

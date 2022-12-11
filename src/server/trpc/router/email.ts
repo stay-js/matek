@@ -2,7 +2,7 @@ import { TRPCError } from '@trpc/server';
 import nodemailer from 'nodemailer';
 import { z } from 'zod';
 import { env } from '@env/server.mjs';
-import { questions } from '@utils/questions';
+import { questions, levels } from '@utils/questions';
 import { router, publicProcedure } from '../trpc';
 
 const transporter = nodemailer.createTransport({
@@ -24,10 +24,12 @@ export const emailRouter = router({
           email: z.string().email(),
         }),
         answers: z.record(z.number().nullable()),
+        level: z.number(),
       }),
     )
-    .mutation(async ({ input: { user, answers } }) => {
-      const correctAnswers = questions.filter(
+    .mutation(async ({ input: { user, answers, level } }) => {
+      const answeredQuestions = questions.filter((question) => question.level <= level);
+      const correctAnswers = answeredQuestions.filter(
         (question) => question.correct === answers[question.id],
       ).length;
 
@@ -44,17 +46,18 @@ export const emailRouter = router({
         <br />
 
         <div>
-        Eredmény: <b>${((correctAnswers / questions.length) * 100).toFixed(2)}%</b>
+        Ön az <b>${level}</b> szintig jutott el ${levels} szintből.
+        Eredmény: <b>${((correctAnswers / answeredQuestions.length) * 100).toFixed(2)}%</b>
         <br />
         Összesen <b>${
-          questions.length
+          answeredQuestions.length
         }</b> kérdésből <b>${correctAnswers}</b> helyes választ adott meg.
         </div>
         <br />
     
         <div>
         Az ön által megadott válaszok:
-        ${questions
+        ${answeredQuestions
           .map((question, index) => {
             const answer = answers[question.id];
 
