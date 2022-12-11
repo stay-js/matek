@@ -23,10 +23,6 @@ const Home: NextPage = () => {
 
   const handleNextLevel = () => {
     if (level && level < levels) {
-      console.log(
-        currentQuestions.filter((question) => question.correct === answers[question.id]).length,
-      );
-      console.log(currentQuestions.filter((question) => question.correct === answers[question.id]));
       if (
         currentQuestions.filter((question) => question.correct === answers[question.id]).length < 2
       )
@@ -176,7 +172,7 @@ const Home: NextPage = () => {
                 <span className="flex w-full items-center justify-center rounded-md bg-neutral-800 px-6 py-3 transition-all group-hover:bg-opacity-0">
                   {index === currentQuestions.length - 1
                     ? level === levels
-                      ? 'Elküldöm'
+                      ? 'Befejezem'
                       : 'Következő szint'
                     : 'Következő'}
                 </span>
