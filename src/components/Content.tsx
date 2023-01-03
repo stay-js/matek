@@ -24,8 +24,9 @@ export const Content: NextPage = () => {
     if (level && level < levels) {
       if (
         currentQuestions.filter((question) => question.correct === answers[question.id]).length < 2
-      )
+      ) {
         return setIsLevelFailedPopupOpen(true);
+      }
 
       window.scrollTo({ top: 0 });
       setLevel(level + 1);
