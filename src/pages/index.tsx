@@ -1,8 +1,8 @@
 import type { NextPage } from 'next';
 import type { Props as User } from '@components/User';
 import { useState } from 'react';
-import { Layout } from '@layouts/Layout';
-import { questions, levels } from '@utils/questions';
+import { Meta } from '@components/Meta';
+import { questions, levels } from '@constants/questions';
 import { Form } from '@components/User';
 import { EmailPopup, LevelFailedPopup } from '@components/Popup';
 import { trpc } from '@utils/trpc';
@@ -37,16 +37,22 @@ const Home: NextPage = () => {
 
   if (!user) {
     return (
-      <Layout path="/" title="Matek - Zétény Nagy" desc="Matek - Zétény Nagy">
-        <Form setUser={setUser} />
-      </Layout>
+      <>
+        <Meta path="/" title="Matek - Zétény Nagy" desc="Matek - Zétény Nagy" />
+
+        <main>
+          <Form setUser={setUser} />
+        </main>
+      </>
     );
   }
 
   if (!level) {
     return (
-      <Layout path="/" title="Matek - Zétény Nagy" desc="Matek - Zétény Nagy">
-        <section className="mx-auto flex min-h-screen w-11/12 flex-col items-center justify-center">
+      <>
+        <Meta path="/" title="Matek - Zétény Nagy" desc="Matek - Zétény Nagy" />
+
+        <main className="mx-auto flex min-h-screen w-11/12 flex-col items-center justify-center">
           <div className="flex w-full max-w-lg flex-col gap-4 rounded-2xl bg-neutral-800 p-8 text-sm shadow-2xl sm:p-12 md:px-20">
             <h2 className="text-xl font-bold text-neutral-50">Szabályok, játék menete</h2>
             <p>
@@ -65,8 +71,8 @@ const Home: NextPage = () => {
               </span>
             </button>
           </div>
-        </section>
-      </Layout>
+        </main>
+      </>
     );
   }
 
@@ -77,53 +83,59 @@ const Home: NextPage = () => {
     ).length;
 
     return (
-      <Layout path="/" title="Matek - Zétény Nagy" desc="Matek - Zétény Nagy">
-        <section className="mx-auto flex min-h-screen w-11/12 flex-col items-center justify-center">
-          <div className="flex w-full max-w-lg flex-col gap-4 rounded-2xl bg-neutral-800 p-8 text-sm shadow-2xl sm:p-12 md:px-20">
-            <h2 className="text-xl font-bold text-neutral-50">Köszönjük a játékot!</h2>
-            <ul>
-              <li>
-                Ön a(z) <b>{level}.</b> szintig jutott el <b>{levels}</b> szintből.
-              </li>
-              <li>
-                Eredmény: <b>{((correctAnswers / answeredQuestions.length) * 100).toFixed(2)}%</b>
-              </li>
-              <li>
-                Összesen <b>{answeredQuestions.length}</b> kérdésből <b>{correctAnswers}</b> helyes
-                választ adott meg.
-              </li>
-            </ul>
+      <>
+        <Meta path="/" title="Matek - Zétény Nagy" desc="Matek - Zétény Nagy" />
 
-            <p>
-              Amennyiben szeretné, hogy válaszait, az ön által megadott e-mail címre elküldjük,
-              nyomja meg az alábbi gombot.
-            </p>
+        <main>
+          <section className="mx-auto flex min-h-screen w-11/12 flex-col items-center justify-center">
+            <div className="flex w-full max-w-lg flex-col gap-4 rounded-2xl bg-neutral-800 p-8 text-sm shadow-2xl sm:p-12 md:px-20">
+              <h2 className="text-xl font-bold text-neutral-50">Köszönjük a játékot!</h2>
+              <ul>
+                <li>
+                  Ön a(z) <b>{level}.</b> szintig jutott el <b>{levels}</b> szintből.
+                </li>
+                <li>
+                  Eredmény: <b>{((correctAnswers / answeredQuestions.length) * 100).toFixed(2)}%</b>
+                </li>
+                <li>
+                  Összesen <b>{answeredQuestions.length}</b> kérdésből <b>{correctAnswers}</b>{' '}
+                  helyes választ adott meg.
+                </li>
+              </ul>
 
-            <button
-              className="group flex w-full items-center rounded-lg bg-gradient-to-br from-green-400 to-blue-600 p-0.5 font-medium  text-white hover:from-green-400 hover:to-blue-600 hover:text-white"
-              type="button"
-              onClick={() => mutate({ user, answers, level })}
-            >
-              <span className="flex w-full items-center justify-center rounded-md bg-neutral-800 px-6 py-3 transition-all group-hover:bg-opacity-0">
-                Kérem az eredményt!
-              </span>
-            </button>
-          </div>
-        </section>
+              <p>
+                Amennyiben szeretné, hogy válaszait, az ön által megadott e-mail címre elküldjük,
+                nyomja meg az alábbi gombot.
+              </p>
 
-        <EmailPopup
-          isOpen={isEmailPopupOpen}
-          setIsOpen={setIsEmailPopupOpen}
-          isLoading={isLoading}
-          isSuccess={isSuccess}
-        />
-      </Layout>
+              <button
+                className="group flex w-full items-center rounded-lg bg-gradient-to-br from-green-400 to-blue-600 p-0.5 font-medium  text-white hover:from-green-400 hover:to-blue-600 hover:text-white"
+                type="button"
+                onClick={() => mutate({ user, answers, level })}
+              >
+                <span className="flex w-full items-center justify-center rounded-md bg-neutral-800 px-6 py-3 transition-all group-hover:bg-opacity-0">
+                  Kérem az eredményt!
+                </span>
+              </button>
+            </div>
+          </section>
+
+          <EmailPopup
+            isOpen={isEmailPopupOpen}
+            setIsOpen={setIsEmailPopupOpen}
+            isLoading={isLoading}
+            isSuccess={isSuccess}
+          />
+        </main>
+      </>
     );
   }
 
   return (
-    <Layout path="/" title="Matek - Zétény Nagy" desc="Matek - Zétény Nagy">
-      <div>
+    <>
+      <Meta path="/" title="Matek - Zétény Nagy" desc="Matek - Zétény Nagy" />
+
+      <main>
         {currentQuestions.map((question, index) => (
           <section
             key={question.id}
@@ -180,14 +192,14 @@ const Home: NextPage = () => {
             </div>
           </section>
         ))}
-      </div>
 
-      <LevelFailedPopup
-        isOpen={isLevelFailedPopupOpen}
-        setIsOpen={setIsLevelFailedPopupOpen}
-        setIsDone={setIsDone}
-      />
-    </Layout>
+        <LevelFailedPopup
+          isOpen={isLevelFailedPopupOpen}
+          setIsOpen={setIsLevelFailedPopupOpen}
+          setIsDone={setIsDone}
+        />
+      </main>
+    </>
   );
 };
 
