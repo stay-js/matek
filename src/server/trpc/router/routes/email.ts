@@ -33,54 +33,51 @@ export const emailRouter = router({
         (question) => question.correct === answers[question.id],
       ).length;
 
-      const mailOptions = {
-        from: `Matek - noreply<${env.NODEMAILER_USER}>`,
-        to: user.email,
-        subject: 'Eredmények',
-        html: `
-        <div>
-        Név: <b>${user.name}</b>
-        <br />
-        E-mail: <b>${user.email}</b>
-        </div>
-        <br />
-
-        <div>
-        Ön a(z) <b>${level}.</b> szintig jutott el <b>${levels}</b> szintből.
-        Eredmény: <b>${((correctAnswers / answeredQuestions.length) * 100).toFixed(2)}%</b>
-        <br />
-        Összesen <b>${
-          answeredQuestions.length
-        }</b> kérdésből <b>${correctAnswers}</b> helyes választ adott meg.
-        </div>
-        <br />
-    
-        <div>
-        Az ön által megadott válaszok:
-        ${answeredQuestions
-          .map((question, index) => {
-            return `
-            <div>
-            <b>${index + 1}. ${question.question}</b>
-            <br />
-            Az ön válasza: <b>${
-              question.answers[answers[question.id]] || 'Nem adott meg választ.'
-            }</b>
-            <br />
-            Helyes válasz: <b>${question.answers[question.correct]}</b>
-            </div>
-            <br />
-          `;
-          })
-          .join('')}
-
-        </div>
-        `,
-      };
-
       try {
-        const status = await transporter.sendMail(mailOptions);
-        return status;
+        return await transporter.sendMail({
+          from: `Matek - noreply<${env.NODEMAILER_USER}>`,
+          to: user.email,
+          subject: 'Eredmények',
+          html: `
+          <div>
+          Név: <b>${user.name}</b>
+          <br />
+          E-mail: <b>${user.email}</b>
+          </div>
+          <br />
+  
+          <div>
+          Ön a(z) <b>${level}.</b> szintig jutott el <b>${levels}</b> szintből.
+          Eredmény: <b>${((correctAnswers / answeredQuestions.length) * 100).toFixed(2)}%</b>
+          <br />
+          Összesen <b>${
+            answeredQuestions.length
+          }</b> kérdésből <b>${correctAnswers}</b> helyes választ adott meg.
+          </div>
+          <br />
+      
+          <div>
+          Az ön által megadott válaszok:
+          ${answeredQuestions
+            .map((question, index) => {
+              return `
+              <div>
+              <b>${index + 1}. ${question.question}</b>
+              <br />
+              Az ön válasza: <b>${
+                question.answers[answers[question.id]] || 'Nem adott meg választ.'
+              }</b>
+              <br />
+              Helyes válasz: <b>${question.answers[question.correct]}</b>
+              </div>
+              <br />
+            `;
+            })
+            .join('')}
+  
+          </div>
+          `,
+        });
       } catch (error) {
         console.error(error);
         throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', cause: error });
