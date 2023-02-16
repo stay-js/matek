@@ -35,7 +35,7 @@ export const emailRouter = router({
 
       try {
         return await transporter.sendMail({
-          from: `Matek - noreply<${env.NODEMAILER_USER}>`,
+          from: 'Matek - noreply<noreply@znagy.hu>',
           to: user.email,
           subject: 'Eredmények',
           html: `

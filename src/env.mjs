@@ -7,7 +7,7 @@ const server = z.object({
     .string()
     .min(1)
     .refine((value) => !isNaN(Number(value))),
-  NODEMAILER_USER: z.string().email(),
+  NODEMAILER_USER: z.string().min(1),
   NODEMAILER_PASS: z.string().min(1),
 
   NODE_ENV: z.enum(['development', 'test', 'production']),
