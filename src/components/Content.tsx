@@ -1,5 +1,6 @@
 import type { NextPage } from 'next';
 import type { Props as User } from '@components/User';
+import type { Question } from '@constants/questions';
 import { useState } from 'react';
 import { questions, levels } from '@constants/questions';
 import { Form } from '@components/User';
@@ -162,7 +163,7 @@ export const Content: NextPage = () => {
                   ? handleNextLevel
                   : () =>
                       document
-                        .getElementById(currentQuestions[index + 1].id)
+                        .getElementById((currentQuestions[index + 1] as Question).id)
                         ?.scrollIntoView({ behavior: 'smooth' })
               }
             >

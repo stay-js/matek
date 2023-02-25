@@ -65,7 +65,7 @@ export const emailRouter = router({
               <b>${index + 1}. ${question.question}</b>
               <br />
               Az ön válasza: <b>${
-                question.answers[answers[question.id]] || 'Nem adott meg választ.'
+                question.answers[answers[question.id] as number] || 'Nem adott meg választ.'
               }</b>
               <br />
               Helyes válasz: <b>${question.answers[question.correct]}</b>
