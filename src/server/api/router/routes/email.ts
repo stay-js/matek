@@ -23,14 +23,14 @@ export const emailRouter = router({
           name: z.string(),
           email: z.string().email(),
         }),
-        answers: z.record(z.number()),
+        answers: z.map(z.string(), z.number()),
         level: z.number(),
       }),
     )
     .mutation(async ({ input: { user, answers, level } }) => {
       const answeredQuestions = questions.filter((question) => question.level <= level);
       const correctAnswers = answeredQuestions.filter(
-        (question) => question.correct === answers[question.id],
+        (question) => question.correct === answers.get(question.id),
       ).length;
 
       try {
@@ -65,7 +65,7 @@ export const emailRouter = router({
               <b>${index + 1}. ${question.question}</b>
               <br />
               Az ön válasza: <b>${
-                question.answers[answers[question.id] as number] || 'Nem adott meg választ.'
+                question.answers[answers.get(question.id) as number] || 'Nem adott meg választ.'
               }</b>
               <br />
               Helyes válasz: <b>${question.answers[question.correct]}</b>

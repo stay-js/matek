@@ -105,4 +105,4 @@ export const questions = [
 
 export const levels = 4;
 
-export type Question = typeof questions[number];
+export type Question = (typeof questions)[number];

@@ -9,7 +9,7 @@ import { trpc } from '@utils/trpc';
 
 export const Content: NextPage = () => {
   const [user, setUser] = useState<User | null>(null);
-  const [answers, setAnswers] = useState<Record<string, number>>({});
+  const [answers, setAnswers] = useState<Map<string, number>>(new Map());
   const [level, setLevel] = useState<number | null>(null);
   const [isDone, setIsDone] = useState<boolean>(false);
   const [isEmailPopupOpen, setIsEmailPopupOpen] = useState<boolean>(false);
@@ -24,7 +24,8 @@ export const Content: NextPage = () => {
   const handleNextLevel = () => {
     if (level && level < levels) {
       if (
-        currentQuestions.filter((question) => question.correct === answers[question.id]).length < 2
+        currentQuestions.filter((question) => question.correct === answers.get(question.id))
+          .length < 2
       ) {
         return setIsLevelFailedPopupOpen(true);
       }
@@ -72,7 +73,7 @@ export const Content: NextPage = () => {
   if (isDone) {
     const answeredQuestions = questions.filter((question) => question.level <= level);
     const correctAnswers = answeredQuestions.filter(
-      (question) => question.correct === answers[question.id],
+      (question) => question.correct === answers.get(question.id),
     ).length;
 
     return (
@@ -145,8 +146,8 @@ export const Content: NextPage = () => {
                     <input
                       type="radio"
                       id={`${question.id}-${index}`}
-                      checked={answers[question.id] === index}
-                      onChange={() => setAnswers({ ...answers, [question.id]: index })}
+                      checked={answers.get(question.id) === index}
+                      onChange={() => setAnswers(new Map(answers.set(question.id, index)))}
                     />
 
                     <label htmlFor={`${question.id}-${index}`}>{answer}</label>
