@@ -1,6 +1,7 @@
 import { Fragment } from 'react';
 import Link from 'next/link';
 import { Dialog, Transition } from '@headlessui/react';
+import { Button } from '@components/Button';
 
 export const EmailPopup: React.FC<{
   isOpen: boolean;
@@ -80,15 +81,9 @@ export const EmailPopup: React.FC<{
               </Dialog.Description>
             </div>
 
-            <button
-              type="button"
-              className="group flex w-fit items-center rounded-lg bg-gradient-to-br from-green-400 to-blue-600 p-0.5 font-medium text-white hover:from-green-400 hover:to-blue-600 hover:text-white"
-              onClick={() => setIsOpen(false)}
-            >
-              <span className="flex w-fit items-center justify-center rounded-md bg-neutral-900 px-4 py-2 text-sm transition-all group-hover:bg-opacity-0">
-                Rendben
-              </span>
-            </button>
+            <Button variant="popup" onClick={() => setIsOpen(false)}>
+              Rendben
+            </Button>
           </Dialog.Panel>
         </Transition.Child>
       </div>

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { TbUser, TbMail } from 'react-icons/tb';
 import { z } from 'zod';
+import { Button } from './Button';
 
 const UserSchema = z.object({
   name: z.string().min(1, 'Kérjük töltse ki ezt a mezőt!'),
@@ -87,14 +88,7 @@ export const Form: React.FC<{ setUser: (user: Props | null) => void }> = ({ setU
           {errors.email && <span className="text-xs text-red-500">{errors.email}</span>}
         </div>
 
-        <button
-          type="submit"
-          className="group flex w-full items-center rounded-lg bg-gradient-to-br from-green-400 to-blue-600 p-0.5 font-medium text-white hover:from-green-400 hover:to-blue-600 hover:text-white"
-        >
-          <span className="flex w-full items-center justify-center rounded-md bg-neutral-800 px-6 py-3 transition-all group-hover:bg-opacity-0">
-            Tovább
-          </span>
-        </button>
+        <Button type="submit">Tovább</Button>
       </form>
     </div>
   );

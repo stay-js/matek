@@ -1,5 +1,6 @@
 import { Fragment } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
+import { Button } from '@components/Button';
 
 export const LevelFailedPopup: React.FC<{
   isOpen: boolean;
@@ -43,29 +44,25 @@ export const LevelFailedPopup: React.FC<{
             </div>
 
             <div className="flex gap-2">
-              <button
-                type="button"
-                className="group flex w-fit items-center rounded-lg bg-gradient-to-br from-green-400 to-blue-600 p-0.5 font-medium text-white hover:from-green-400 hover:to-blue-600 hover:text-white"
+              <Button
+                variant="popup"
                 onClick={() => {
                   setIsOpen(false);
                   window.scrollTo({ top: 0, behavior: 'smooth' });
                 }}
               >
-                <span className="flex w-fit items-center justify-center rounded-md bg-neutral-900 px-4 py-2 text-sm transition-all group-hover:bg-opacity-0">
-                  Újra próbálom
-                </span>
-              </button>
+                Újra próbálom
+              </Button>
 
-              <button
-                type="button"
-                className="rounded-lg border-2 border-red-500 bg-red-500 py-2 px-4 text-sm font-bold text-white transition-all hover:bg-transparent hover:text-red-500"
+              <Button
+                variant="red"
                 onClick={() => {
                   setIsOpen(false);
                   setIsDone(true);
                 }}
               >
                 Befejezem
-              </button>
+              </Button>
             </div>
           </Dialog.Panel>
         </Transition.Child>
