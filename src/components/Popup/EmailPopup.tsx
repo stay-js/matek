@@ -81,7 +81,7 @@ export const EmailPopup: React.FC<{
               </Dialog.Description>
             </div>
 
-            <Button variant="popup" onClick={() => setIsOpen(false)}>
+            <Button variant="small" onClick={() => setIsOpen(false)}>
               Rendben
             </Button>
           </Dialog.Panel>

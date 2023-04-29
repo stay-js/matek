@@ -45,7 +45,7 @@ export const LevelFailedPopup: React.FC<{
 
             <div className="flex gap-2">
               <Button
-                variant="popup"
+                variant="small"
                 onClick={() => {
                   setIsOpen(false);
                   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -55,7 +55,7 @@ export const LevelFailedPopup: React.FC<{
               </Button>
 
               <Button
-                variant="red"
+                variant="small-red"
                 onClick={() => {
                   setIsOpen(false);
                   setIsDone(true);
