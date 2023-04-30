@@ -173,7 +173,7 @@ export const Content: React.FC = () => {
 
 const Page: NextPage = () => (
   <>
-    <Meta path="/" title="Matek - Zétény Nagy" desc="Matek - Zétény Nagy" />
+    <Meta path="/" title="Matek - Zétény Nagy" description="Matek - Zétény Nagy" />
 
     <Content />
   </>
