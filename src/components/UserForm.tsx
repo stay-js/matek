@@ -15,7 +15,7 @@ const defaultValues: Props = {
   email: '',
 };
 
-export const Form: React.FC<{ setUser: (user: Props | null) => void }> = ({ setUser }) => {
+export const UserForm: React.FC<{ setUser: (user: Props | null) => void }> = ({ setUser }) => {
   const [errors, setErrors] = useState<Partial<Props>>({});
   const [values, setValues] = useState<Props>(defaultValues);
 
@@ -41,7 +41,7 @@ export const Form: React.FC<{ setUser: (user: Props | null) => void }> = ({ setU
   };
 
   return (
-    <div className="mx-auto flex min-h-screen w-11/12 flex-col items-center justify-center">
+    <main className="mx-auto flex min-h-screen w-11/12 flex-col items-center justify-center">
       <form
         onSubmit={handleSubmit}
         className="flex w-full max-w-lg flex-col gap-4 rounded-2xl bg-neutral-800 p-8 text-sm shadow-2xl sm:p-12 md:px-20"
@@ -90,6 +90,6 @@ export const Form: React.FC<{ setUser: (user: Props | null) => void }> = ({ setU
 
         <Button type="submit">Tovább</Button>
       </form>
-    </div>
+    </main>
   );
 };

@@ -1,10 +1,12 @@
 import type { NextPage } from 'next';
-import type { Props as User } from '@components/User';
+import type { Props } from './api/send-email';
+import type { Props as User } from '@components/UserForm';
 import type { Question } from '@constants/questions';
 import { useState } from 'react';
-import { trpc } from '@utils/trpc';
+import { useMutation } from '@tanstack/react-query';
+import SuperJSON from 'superjson';
 import { questions, levels } from '@constants/questions';
-import { Form } from '@components/User';
+import { UserForm } from '@components/UserForm';
 import { EmailPopup, LevelFailedPopup } from '@components/Popup';
 import { Meta } from '@components/Meta';
 import { Button } from '@components/Button';
@@ -19,9 +21,20 @@ export const Content: React.FC = () => {
 
   const currentQuestions = questions.filter((question) => question.level === level);
 
-  const { mutate, isLoading, isSuccess } = trpc.email.send.useMutation({
-    onMutate: () => setIsEmailPopupOpen(true),
-  });
+  const { mutate, isSuccess, isLoading } = useMutation(
+    async (data: Props) => {
+      return fetch('/api/send-email', {
+        method: 'POST',
+        body: SuperJSON.stringify(data),
+      }).then(async (res) => {
+        if (!res.ok) throw new Error(await res.text());
+        return res.json();
+      });
+    },
+    {
+      onMutate: () => setIsEmailPopupOpen(true),
+    },
+  );
 
   const handleNextLevel = () => {
     if (level && level < levels) {
@@ -39,13 +52,7 @@ export const Content: React.FC = () => {
     if (level === levels) setIsDone(true);
   };
 
-  if (!user) {
-    return (
-      <main>
-        <Form setUser={setUser} />
-      </main>
-    );
-  }
+  if (!user) return <UserForm setUser={setUser} />;
 
   if (!level) {
     return (
